@@ -157,11 +157,12 @@ class _Exercicio_05State extends State<Exercicio_05> {
                     ),
                     onPressed: () async {
                       if (_formkey.currentState.validate()) {
-                        // await _exercicio05(
-                        //     _quantTestController.text,
-                        //     _alturaController.text,
-                        //     _larguraController.text,
-                        //     _galhoController.text);
+                        await _exercicio05([
+                          _quantTestController.text,
+                          _alturaController.text,
+                          _larguraController.text,
+                          _galhoController.text
+                        ]);
                         _resetFields();
                         abrirDialog();
                       }
@@ -178,7 +179,14 @@ class _Exercicio_05State extends State<Exercicio_05> {
     AlertDialog result = AlertDialog(
       title: Text("Exemplo de Saída"),
       content: Text(
-        "${resultado}",
+        "${resultado}"
+            .trimLeft()
+            .replaceAll(",", "\n")
+            .trimLeft()
+            .replaceAll("[", "")
+            .trimLeft()
+            .replaceAll("]", "")
+            .trimLeft(),
         style: TextStyle(fontSize: 25.0, fontWeight: FontWeight.bold),
       ),
       actions: <Widget>[
@@ -207,15 +215,20 @@ class _Exercicio_05State extends State<Exercicio_05> {
     });
   }
 
-  // Future _exercicio05(list) async {
-  //   var params = <String, dynamic>{
-  //     "from": [1, 2, 3]
-  //   };
-  //   try {
-  //     List result = await platform.invokeMethod("_exercicio05", params);
-  //     print(">> Resultado:  $result");
-  //   } on PlatformException catch (e) {
-  //     print(e.message);
-  //   }
-  // }
+  Future _exercicio05(list) async {
+    var params = <String, dynamic>{
+      "from": [
+        _quantTestController.text,
+        _alturaController.text,
+        _larguraController.text,
+        _galhoController.text,
+      ],
+    };
+    try {
+      List result = await platform.invokeMethod("_exercicio05", params);
+      resultado = result;
+    } on PlatformException catch (e) {
+      print(e.message);
+    }
+  }
 }

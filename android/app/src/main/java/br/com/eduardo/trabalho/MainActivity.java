@@ -87,35 +87,34 @@ public class MainActivity extends FlutterActivity {
 
                             break;
                         case "_exercicio05":
+                            Map<String, List> params = (Map<String, List>)call.arguments;
+                            List list = (ArrayList) params.get("from");
 
-                        //    int quantidade, altura, espessura,galhos = 0;
-        
-                        //     quantidade = Integer.parseInt(in.readLine());
-                        
-                        //     for (int i = 0; i < quantidade; i++) {
+                            List<String> resposta = new ArrayList<String>();
                             
-                        //     String[] tamanhos = in.readLine().split(" ");
+                            int quantidade, altura, espessura, galhos;
+                                
+                            quantidade = Integer.parseInt(list.get(0).toString());
+                            altura  = Integer.parseInt(list.get(1).toString());
+                            espessura  = Integer.parseInt(list.get(2).toString());
+                            galhos  = Integer.parseInt(list.get(3).toString());
+
+                            for (int i = 0; i < quantidade; i++) {
+                                if (altura >= 200 && altura <= 300 && espessura >= 50 && galhos >= 150) {
+                                    resposta.add("Sim");
+                                } else {
+                                    resposta.add("Nao");
+                                }
+                            }
                             
-                        //     altura = Integer.parseInt(tamanhos[0]);
-                        //     espessura = Integer.parseInt(tamanhos[1]);
-                        //     galhos = Integer.parseInt(tamanhos[2]);
-                            
-                        //     if (altura >= 200 && altura <= 300 && espessura >= 50 && galhos >= 150) {
-                
-                        //         System.out.println("Sim");
-                
-                        //     } else {
-                        //         System.out.println("Nao");
-                        //     }
-                            
-                        //     result.success();
+                            result.success(resposta);
 
                             break;
                         default:
                             result.notImplemented();
 
                     }
-                });
+            }  );
 
     }
 
